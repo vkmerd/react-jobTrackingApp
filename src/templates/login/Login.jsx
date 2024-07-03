@@ -1,20 +1,50 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSupabase } from "../../SupaClient";
 
 export default function Login() {
     const [login, setLogin] = useState(true);
     const [register, setRegister] = useState(false);
+    const [message, setMessage] = useState('');
 
     const supabase = useSupabase();
-    console.log(supabase);
+    const navigate = useNavigate();
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        const loginData = Object.fromEntries(new FormData(e.target));
+        const { e_mail, password } = loginData;
+
+        try {
+            const { error, user } = await supabase.auth.signInWithPassword({
+                email: e_mail,
+                password: password,
+            });
+
+            if (error) {
+                if (error.message.includes("Email not confirmed")) {
+                    setMessage("Email adresiniz doğrulanmamış. Lütfen e-posta adresinizi doğrulayın.");
+                    alert("Doğrulama e-postası gönderildi. Lütfen e-posta adresinizi kontrol edin.");
+                } else {
+                    console.error("Hata:", error.message);
+                }
+                return;
+            }
+
+            if (user && user.confirmed_at) {
+                // Giriş başarılı, Dashboard'a yönlendir
+                navigate('/dashboard');
+            } else {
+                setMessage("Email adresiniz doğrulanmamış. Lütfen e-posta adresinizi doğrulayın.");
+                alert("Doğrulama e-postası gönderildi. Lütfen e-posta adresinizi kontrol edin.");
+            }
+        } catch (error) {
+            console.error("Beklenmedik bir hata oluştu:", error.message);
+        }
     };
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
-
         const registerData = Object.fromEntries(new FormData(e.target));
         const { name_surname, e_mail, password } = registerData;
 
@@ -22,9 +52,13 @@ export default function Login() {
             const { data, error } = await supabase.auth.signUp({
                 email: e_mail,
                 password: password,
+                options: {
+                    data: {
+                        name_surname: name_surname,
+                    },
+                },
             });
 
-            // Hata kontrolü
             if (error) {
                 console.error("Hata:", error.message);
                 return;
@@ -36,18 +70,7 @@ export default function Login() {
                 return;
             }
 
-            const { error: insertError } = await supabase
-                .from("users")
-                .insert([
-                    { id: user.id, name_surname: name_surname, email: e_mail }
-                ]);
-
-            if (insertError) {
-                console.error("Error inserting user data:", insertError.message);
-                return;
-            }
-
-            console.log("User signed up and data inserted");
+            setMessage("Kayıt başarılı! Lütfen e-posta adresinizi doğrulayın.");
             e.target.reset();
         } catch (error) {
             console.error("Beklenmedik bir hata oluştu:", error.message);
@@ -141,6 +164,7 @@ export default function Login() {
                         </form>
                     </div>
                 )}
+                {message && <p>{message}</p>}
             </div>
             <div className="loginImage basis-2/4">
                 <div className="flex justify-center items-center h-full">
