@@ -9,6 +9,13 @@ export default {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
       },
+      colors: {
+        'gradient-start': '#E9EFFA',
+        'gradient-end': 'rgba(233, 239, 250, 0.5)',
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.5) 100%)',
+      }
     },
   },
   plugins: [],

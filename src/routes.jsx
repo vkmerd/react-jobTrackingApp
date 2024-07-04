@@ -3,6 +3,8 @@ import App from "./App";
 import Dashboard from "./templates/dashboard/Dashboard";
 import Login from "./templates/login/Login";
 import Tasks from "./templates/dashboard/pages/Tasks";
+import CompletedTasks from "./templates/dashboard/pages/CompletedTasks";
+import AddTasks from "./templates/dashboard/pages/AddTasks";
 
 export const routes = createBrowserRouter([
     {
@@ -20,6 +22,18 @@ export const routes = createBrowserRouter([
                     {
                         path: 'tasks',
                         element: <Tasks />
+                    },
+                    {
+                        path:'completed-task',
+                        element:<CompletedTasks />   
+                    },
+                    {
+                        index:true,
+                        element:<AddTasks /> 
+                    },
+                    {
+                        path:'add-task',
+                        element:<AddTasks /> 
                     }
                 ]
             },
