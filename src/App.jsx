@@ -34,8 +34,8 @@ export default function App() {
 
   return (
     <>
-     <div className="w-full h-screen bg-black flex justify-center items-center">
-        <Outlet />
+     <div className="w-full h-screen">
+        <Outlet context={{ session }} />
      </div>
     </>
   )

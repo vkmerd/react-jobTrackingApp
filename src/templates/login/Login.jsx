@@ -24,7 +24,6 @@ export default function Login() {
             if (error) {
                 if (error.message.includes("Email not confirmed")) {
                     setMessage("Email adresiniz doğrulanmamış. Lütfen e-posta adresinizi doğrulayın.");
-                    alert("Doğrulama e-postası gönderildi. Lütfen e-posta adresinizi kontrol edin.");
                 } else {
                     console.error("Hata:", error.message);
                 }
@@ -32,7 +31,6 @@ export default function Login() {
             }
 
             if (user && user.confirmed_at) {
-                // Giriş başarılı, Dashboard'a yönlendir
                 navigate('/dashboard');
             } else {
                 setMessage("Email adresiniz doğrulanmamış. Lütfen e-posta adresinizi doğrulayın.");
@@ -78,6 +76,7 @@ export default function Login() {
     };
 
     return (
+        <div className="w-full h-screen bg-black flex justify-center items-center">
         <div className="w-[1320px] h-[80vh] bg-white rounded-3xl p-[30px] flex">
             <div className="loginForm basis-2/4">
                 <h2 className="text-2xl font-bold font-poppins">Kanban İş Takip Uygulamasına Hoş Geldiniz!</h2>
@@ -172,5 +171,6 @@ export default function Login() {
                 </div>
             </div>
         </div>
+    </div>
     );
 }
