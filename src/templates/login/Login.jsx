@@ -34,7 +34,7 @@ export default function Login() {
                 navigate('/dashboard');
             } else {
                 setMessage("Email adresiniz doğrulanmamış. Lütfen e-posta adresinizi doğrulayın.");
-                alert("Doğrulama e-postası gönderildi. Lütfen e-posta adresinizi kontrol edin.");
+                alert("Doğrulama e-postası gönderilmiş olabilir. Lütfen e-posta adresinizi kontrol edin, veya doğrulamışsanız devam edebilirsiniz");
             }
         } catch (error) {
             console.error("Beklenmedik bir hata oluştu:", error.message);
@@ -76,8 +76,8 @@ export default function Login() {
     };
 
     return (
-        <div className="w-full h-screen bg-black flex justify-center items-center">
-        <div className="w-[1320px] h-[80vh] bg-white rounded-3xl p-[30px] flex">
+        <div className="w-full h-screen bg-[#635fc7] flex justify-center items-center">
+        <div className="w-[1320px] h-[60vh] bg-white rounded-3xl p-[30px] flex items-center shadow-2xl">
             <div className="loginForm basis-2/4">
                 <h2 className="text-2xl font-bold font-poppins">Kanban İş Takip Uygulamasına Hoş Geldiniz!</h2>
                 <div className="flex justify-start mt-[10px]">
@@ -125,7 +125,6 @@ export default function Login() {
                                 Giriş Yap
                             </button>
                         </form>
-                        <button>Google ile giriş yap</button>
                     </div>
                 )}
 
@@ -167,7 +166,7 @@ export default function Login() {
             </div>
             <div className="loginImage basis-2/4">
                 <div className="flex justify-center items-center h-full">
-                    <img src="../../public/kanban-logo.png" alt="" className="w-[50%] h-[200px] object-contain" />
+                    <img src="../../public/checklist.jpg" alt=""  />
                 </div>
             </div>
         </div>

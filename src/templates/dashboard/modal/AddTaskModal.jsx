@@ -1,9 +1,11 @@
 import { useSupabase } from "../../../SupaClient";
 import { useOutletContext } from 'react-router-dom';
+import { useTaskContext } from '../../../TaskContext';
 
-export const AddTaskModal = ({ openmodals,fetchTableHeadersAndTasks, tableId,setAddTaskModals }) => {
+export const AddTaskModal = ({ fetchTableHeadersAndTasks }) => {
   const supabase = useSupabase();
-  const { session, setAddTaskModal} = useOutletContext();
+  const { session } = useOutletContext();
+  const { addTaskModal, setAddTaskModal, selectedTableId } = useTaskContext();
 
   const handleAddTask = async (e) => {
     e.preventDefault();
@@ -20,12 +22,12 @@ export const AddTaskModal = ({ openmodals,fetchTableHeadersAndTasks, tableId,set
 
     const { data, error } = await supabase
       .from('tasks')
-      .insert([{ user_id: user.id, header_id: tableId, status: taskTitle, description: taskDescription }]);
+      .insert([{ user_id: user.id, header_id: selectedTableId, status: taskTitle, description: taskDescription }]);
 
     if (error) {
-      console.error("Error adding task:", error);
+      console.error("Task Eklenemedi:", error);
     } else {
-      console.log("Task added successfully:", data);
+      console.log("Task Eklendi:", data);
       fetchTableHeadersAndTasks();
       setAddTaskModal(false);
     }
@@ -37,12 +39,12 @@ export const AddTaskModal = ({ openmodals,fetchTableHeadersAndTasks, tableId,set
 
   return (
     <>
-      {openmodals && (
+      {addTaskModal && (
         <>
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setAddTaskModals(false)}></div>
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setAddTaskModal(false)}></div>
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5 rounded-lg shadow-lg z-50 w-1/3 p-[15px]" onClick={handleModalClick}>
             <div className="flex justify-end">
-              <button onClick={() => setAddTaskModals(false)}>Kapat</button>
+              <button onClick={() => setAddTaskModal(false)}>Kapat</button>
             </div>
             <h3 className="text-2xl text-center">Yeni Görev Ekleyiniz</h3>
             <form onSubmit={handleAddTask} className='mt-[20px] flex-column'>
