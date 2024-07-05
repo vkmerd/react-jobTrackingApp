@@ -4,6 +4,7 @@ import DashNavigate from './navigation/DashNavigate';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { AddTableModal } from './modal/AddTableModal';
+import { AddTaskModal } from './modal/AddTaskModal';
 
 export default function Dashboard(){
 
@@ -11,7 +12,7 @@ export default function Dashboard(){
     const user = session?.user;
     const supabase = useSupabase();
     const [addTableModal,setAddTableModal] = useState(false)
-    
+    const [addTaskModal,setAddTaskModal] = useState(false)
 
     const handleSignOut = async() => {
         const { error } = await supabase.auth.signOut();
@@ -45,7 +46,7 @@ export default function Dashboard(){
         <>
             <div className="flex h-screen overflow-hidden">
             <AddTableModal openmodal={addTableModal} handleAddTableName={handleAddTableName} setAddTableModal={setAddTableModal} />
-
+            <AddTaskModal openmodals={addTaskModal} setAddTaskModals={setAddTaskModal} />
                 <div className="w-[350px] border-r border-r-gray-300 border-r-solid">
                     <div className="p-[25px]">
                         <img src="../../public/kanban-logo.png" alt="kanban-logo" />
@@ -74,7 +75,7 @@ export default function Dashboard(){
                         >+ Add New Table</button>
                     </div>
                     <div className="p-[50px] h-screen">
-                        <Outlet />
+                        <Outlet context={{ session, setAddTaskModal  }} />
                     </div>
                 </div>
             </div>
