@@ -20,10 +20,6 @@ export const routes = createBrowserRouter([
                 element: <Dashboard />,
                 children: [
                     {
-                        path: 'tasks',
-                        element: <Tasks />
-                    },
-                    {
                         path:'completed-task',
                         element:<CompletedTasks />   
                     },
