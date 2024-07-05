@@ -53,7 +53,7 @@ export default function Dashboard(){
                 <AddTaskEditModal />
                 <div className="w-[350px] border-r border-r-gray-300 border-r-solid">
                     <div className="p-[25px]">
-                        <img src="../../public/kanban-logo.png" alt="kanban-logo" />
+                        <img src="/../kanban-logo.png" alt="kanban-logo" />
                         {user ? (
                             <>
                                 <p className='mt-[20px]'>Hoş geldin, <b>{user.user_metadata.name_surname}!</b></p>

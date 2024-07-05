@@ -166,7 +166,7 @@ export default function Login() {
             </div>
             <div className="loginImage basis-2/4">
                 <div className="flex justify-center items-center h-full">
-                    <img src="../../public/checklist.jpg" alt=""  />
+                    <img src="/../checklist.jpg" alt=""  />
                 </div>
             </div>
         </div>
