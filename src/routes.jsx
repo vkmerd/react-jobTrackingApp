@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Dashboard from "./templates/dashboard/Dashboard";
 import Login from "./templates/login/Login";
-import Tasks from "./templates/dashboard/pages/Tasks";
 import CompletedTasks from "./templates/dashboard/pages/CompletedTasks";
 import AddTasks from "./templates/dashboard/pages/AddTasks";
 
