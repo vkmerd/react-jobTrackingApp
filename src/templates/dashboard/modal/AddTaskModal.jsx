@@ -1,12 +1,14 @@
-import { useSupabase } from "../../../SupaClient";
+import { useSupabase } from "../../../context/SupaClient";
 import { useOutletContext } from 'react-router-dom';
-import { useTaskContext } from '../../../TaskContext';
+import { useTaskContext } from '../../../context/TaskContext';
+import { useTableandHeadersTaskContext } from "../../../context/FetchTableHeaderContext";
 
-export const AddTaskModal = ({ fetchTableHeadersAndTasks }) => {
+export const AddTaskModal = () => {
   const supabase = useSupabase();
   const { session } = useOutletContext();
   const { addTaskModal, setAddTaskModal, selectedTableId } = useTaskContext();
-
+  const { fetchTableHeadersAndTasks } = useTableandHeadersTaskContext();
+  
   const handleAddTask = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);

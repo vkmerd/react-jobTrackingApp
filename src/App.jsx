@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useSupabase } from "./SupaClient";
+import { useSupabase } from "./context/SupaClient";
 
 
 export default function App() {
