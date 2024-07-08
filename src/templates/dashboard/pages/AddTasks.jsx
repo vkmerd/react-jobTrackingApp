@@ -79,10 +79,12 @@ export default function AddTasks() {
           <div key={table.id} className="p-4 m-2 bg-white rounded shadow">
             <div className="flex justify-between items-center">
               <h3 className="text-2xl">{table.title}</h3>
-              <button
-                className="bg-[#635FC7] p-[10px] text-white rounded-[15px]"
-                onClick={() => handlePlusClick(table.id)}>+</button>
+              <div>
                 <button className="bg-red-500 text-white p-[10px] mr-[10px]" onClick={() => {deleteTable(table.id)}}>X</button>
+                <button
+                  className="bg-[#635FC7] p-[10px] text-white rounded-[15px]"
+                  onClick={() => handlePlusClick(table.id)}>+</button>
+              </div>
             </div>
             <div className="mt-4">
               {tasks.filter(task => task.header_id === table.id && !task.completed).map((task) => (

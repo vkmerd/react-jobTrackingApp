@@ -78,7 +78,7 @@ export default function Login() {
 
     return (
         <div className="w-full h-screen bg-[#635fc7] flex justify-center items-center">
-        <div className="w-[1320px] h-[60vh] bg-white rounded-3xl p-[30px] flex items-center shadow-2xl">
+        <div className="w-[1320px] h-[90vh] bg-white rounded-3xl p-[30px] flex flex-col items-center shadow-2xl sm:flex-row h-[60vh]">
             <div className="loginForm basis-2/4">
                 <h2 className="text-2xl font-bold font-poppins">Kanban İş Takip Uygulamasına Hoş Geldiniz!</h2>
                 <div className="flex justify-start mt-[10px]">
@@ -104,7 +104,7 @@ export default function Login() {
                 {login && (
                     <div className="mt-[40px]">
                         <h2 className="text-3xl">Giriş Yap</h2>
-                        <form onSubmit={handleLoginSubmit} className="w-2/3 flex flex-col gap-[15px] mt-[20px] ">
+                        <form onSubmit={handleLoginSubmit} className="w-full flex flex-col gap-[15px] mt-[20px] sm:w-2/3">
                             <input
                                 type="email"
                                 name="e_mail"
@@ -132,7 +132,7 @@ export default function Login() {
                 {register && (
                     <div className="mt-[40px]">
                         <h2 className="text-3xl">Kayıt ol</h2>
-                        <form onSubmit={handleRegisterSubmit} className="w-2/3 flex flex-col gap-[15px] mt-[20px] ">
+                        <form onSubmit={handleRegisterSubmit} className="w-full flex flex-col gap-[15px] mt-[20px] sm:w-2/3">
                             <input
                                 type="text"
                                 name="name_surname"
@@ -167,7 +167,7 @@ export default function Login() {
             </div>
             <div className="loginImage basis-2/4">
                 <div className="flex justify-center items-center h-full">
-                    <img src="/../checklist.jpg" alt=""  />
+                    <img src="/../checklist.jpg"/>
                 </div>
             </div>
         </div>
