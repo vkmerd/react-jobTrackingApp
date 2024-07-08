@@ -43,7 +43,35 @@ export default function AddTasks() {
     alert("Task tamamlandı");
     fetchTableHeadersAndTasks();
   }
+  const deleteTask = async(taskId) => {
+    
+    const { data, error } = await supabase
+      .from('tasks')
+      .delete()
+      .eq('id', taskId)
 
+      if (error) {
+      console.error("Error updating task:", error);
+      return;
+    }
+   alert("task basarıyla silindi");
+   fetchTableHeadersAndTasks(); 
+    
+  }
+  const deleteTable = async(tableId) => {
+    
+    const { data, error } = await supabase
+      .from('task_headers')
+      .delete()
+      .eq('id', tableId)
+
+      if (error) {
+      console.error("Error updating task:", error);
+      return;
+    }
+   alert("table basarıyla silindi");
+   fetchTableHeadersAndTasks(); 
+  }
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-x-scroll xl:grid-cols-3 2xl:grid-cols-4 items-start h-full">
@@ -54,6 +82,7 @@ export default function AddTasks() {
               <button
                 className="bg-[#635FC7] p-[10px] text-white rounded-[15px]"
                 onClick={() => handlePlusClick(table.id)}>+</button>
+                <button className="bg-red-500 text-white p-[10px] mr-[10px]" onClick={() => {deleteTable(table.id)}}>X</button>
             </div>
             <div className="mt-4">
               {tasks.filter(task => task.header_id === table.id && !task.completed).map((task) => (
@@ -64,6 +93,7 @@ export default function AddTasks() {
                       <p>{task.description}</p>
                     </div>
                     <div>
+                      <button className="bg-red-500 text-white p-[10px] mr-[10px]" onClick={() => {deleteTask(task.id)}}>X</button>
                       <button
                         className="bg-[#635FC7] p-[10px] text-white rounded-[5px]"
                         onClick={() => openEditModal(task.id)}>+</button>
